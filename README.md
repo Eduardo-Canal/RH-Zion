@@ -68,7 +68,7 @@ npm run lint
 # Executar linter e corrigir problemas automaticamente
 npm run lint:fix
 
-# Formatar código com Oxfmt
+# Formatar código com Prettier
 npm run format
 ```
 
@@ -107,8 +107,9 @@ Este template inclui uma biblioteca completa de componentes Shadcn UI baseados e
 ## 📝 Ferramentas de Qualidade de Código
 
 - **TypeScript**: Tipagem estática
+- **ESLint**: Análise de código estático
 - **Oxlint**: Linter extremamente rápido
-- **Oxfmt**: Formatação automática de código
+- **Prettier**: Formatação automática de código
 
 ## 🔄 Workflow de Desenvolvimento
 

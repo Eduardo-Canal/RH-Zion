@@ -27,7 +27,7 @@ const formSchema = z.object({
   descricao: z.string().optional(),
   departamento: z.string().min(2, 'Departamento obrigatório'),
   requisitos: z.string().optional(),
-  salario: z.coerce.number().min(0, 'Salário deve ser positivo'),
+  salario: z.number().min(0, 'Salário deve ser positivo'),
   tipo_contrato: z.string().min(1, 'Selecione o tipo de contrato'),
   status: z.enum(['Aberta', 'Fechada']),
 })
@@ -106,7 +106,12 @@ export function JobForm({ initialData, onSubmit, onCancel }: JobFormProps) {
               <FormItem>
                 <FormLabel>Salário (R$)</FormLabel>
                 <FormControl>
-                  <Input type="number" placeholder="0.00" {...field} />
+                  <Input
+                    type="number"
+                    placeholder="0.00"
+                    value={field.value ?? ''}
+                    onChange={(e) => field.onChange(e.target.value === '' ? 0 : Number(e.target.value))}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

@@ -8,9 +8,9 @@ export const evaluationSchema = z.object({
     .string({ required_error: 'Selecione um avaliador' })
     .min(1, 'Selecione um avaliador'),
   periodo: z.string().min(2, 'Informe o período (ex: Jan/2024)'),
-  notaPontualidade: z.coerce.number().min(1).max(5),
-  notaQualidade: z.coerce.number().min(1).max(5),
-  notaTrabalhoEquipe: z.coerce.number().min(1).max(5),
+  notaPontualidade: z.number().min(1).max(5),
+  notaQualidade: z.number().min(1).max(5),
+  notaTrabalhoEquipe: z.number().min(1).max(5),
   observacoes: z.string().optional(),
 })
 

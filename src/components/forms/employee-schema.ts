@@ -22,9 +22,9 @@ export const employeeSchema = z.object({
     required_error: 'Selecione o nível de acesso',
   }),
   data_admissao: z.date({ required_error: 'Data de admissão é obrigatória' }),
-  salario: z.coerce.number().min(1, 'Salário deve ser maior que 0'),
+  salario: z.number().min(1, 'Salário deve ser maior que 0'),
   tipo_contrato: z.string({ required_error: 'Tipo de contrato é obrigatório' }),
-  status: z.string().default('Ativo'),
+  status: z.string().optional().default('Ativo'),
 })
 
-export type EmployeeFormValues = z.infer<typeof employeeSchema>
+export type EmployeeFormValues = z.input<typeof employeeSchema>

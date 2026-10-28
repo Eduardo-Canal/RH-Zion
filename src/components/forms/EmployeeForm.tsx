@@ -370,7 +370,12 @@ export function EmployeeForm({
                         type="number"
                         step="0.01"
                         className="rounded-lg border-input/50 focus:ring-primary/20"
-                        {...field}
+                        value={field.value ?? ''}
+                        onChange={(e) =>
+                          field.onChange(
+                            e.target.value === '' ? 0 : Number(e.target.value),
+                          )
+                        }
                       />
                     </FormControl>
                     <FormMessage />

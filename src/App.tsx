@@ -24,9 +24,7 @@ import { UserRoleProvider } from '@/hooks/use-user-role'
 import ProtectedRoute from '@/components/ProtectedRoute'
 
 const App = () => (
-  <BrowserRouter
-    future={{ v7_startTransition: false, v7_relativeSplatPath: false }}
-  >
+  <BrowserRouter>
     <AuthProvider>
       <UserRoleProvider>
         <TooltipProvider>

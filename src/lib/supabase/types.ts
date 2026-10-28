@@ -536,6 +536,67 @@ export type Database = {
           },
         ]
       }
+      avaliacoes: {
+        Row: {
+          avaliador_id: string | null
+          colaborador_id: string
+          created_at: string
+          id: string
+          nota_pontualidade: number
+          nota_qualidade: number
+          nota_trabalho_equipe: number
+          observacoes: string | null
+          organization_id: string
+          periodo: string
+        }
+        Insert: {
+          avaliador_id?: string | null
+          colaborador_id: string
+          created_at?: string
+          id?: string
+          nota_pontualidade: number
+          nota_qualidade: number
+          nota_trabalho_equipe: number
+          observacoes?: string | null
+          organization_id: string
+          periodo: string
+        }
+        Update: {
+          avaliador_id?: string | null
+          colaborador_id?: string
+          created_at?: string
+          id?: string
+          nota_pontualidade?: number
+          nota_qualidade?: number
+          nota_trabalho_equipe?: number
+          observacoes?: string | null
+          organization_id?: string
+          periodo?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'avaliacoes_organization_id_fkey'
+            columns: ['organization_id']
+            isOneToOne: false
+            referencedRelation: 'organizations'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'fk_avaliacoes_avaliador'
+            columns: ['avaliador_id']
+            isOneToOne: false
+            referencedRelation: 'colaboradores'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'fk_avaliacoes_colaborador'
+            columns: ['colaborador_id']
+            isOneToOne: false
+            referencedRelation: 'colaboradores'
+            referencedColumns: ['id']
+          },
+        ]
+      }
       b24_users: {
         Row: {
           id: string
@@ -1189,6 +1250,83 @@ export type Database = {
           status?: string
         }
         Relationships: []
+      }
+      colaboradores: {
+        Row: {
+          cargo: string | null
+          cpf: string | null
+          created_at: string
+          data_admissao: string | null
+          data_nascimento: string | null
+          departamento: string | null
+          documentos_urls: Json | null
+          email: string | null
+          endereco: string | null
+          id: string
+          image_gender: string | null
+          nome: string
+          organization_id: string
+          rg: string | null
+          role: string
+          salario: number | null
+          status: string | null
+          telefone: string | null
+          tipo_contrato: string | null
+          user_id: string | null
+        }
+        Insert: {
+          cargo?: string | null
+          cpf?: string | null
+          created_at?: string
+          data_admissao?: string | null
+          data_nascimento?: string | null
+          departamento?: string | null
+          documentos_urls?: Json | null
+          email?: string | null
+          endereco?: string | null
+          id?: string
+          image_gender?: string | null
+          nome: string
+          organization_id: string
+          rg?: string | null
+          role?: string
+          salario?: number | null
+          status?: string | null
+          telefone?: string | null
+          tipo_contrato?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          cargo?: string | null
+          cpf?: string | null
+          created_at?: string
+          data_admissao?: string | null
+          data_nascimento?: string | null
+          departamento?: string | null
+          documentos_urls?: Json | null
+          email?: string | null
+          endereco?: string | null
+          id?: string
+          image_gender?: string | null
+          nome?: string
+          organization_id?: string
+          rg?: string | null
+          role?: string
+          salario?: number | null
+          status?: string | null
+          telefone?: string | null
+          tipo_contrato?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'colaboradores_organization_id_fkey'
+            columns: ['organization_id']
+            isOneToOne: false
+            referencedRelation: 'organizations'
+            referencedColumns: ['id']
+          },
+        ]
       }
       company_duplicates: {
         Row: {
@@ -2102,6 +2240,54 @@ export type Database = {
             columns: ['lead_pendente_id']
             isOneToOne: false
             referencedRelation: 'leads_automacao_pendentes'
+            referencedColumns: ['id']
+          },
+        ]
+      }
+      ferias: {
+        Row: {
+          colaborador_id: string | null
+          created_at: string
+          data_fim: string
+          data_inicio: string
+          id: string
+          observacoes: string | null
+          organization_id: string
+          status: string | null
+        }
+        Insert: {
+          colaborador_id?: string | null
+          created_at?: string
+          data_fim: string
+          data_inicio: string
+          id?: string
+          observacoes?: string | null
+          organization_id: string
+          status?: string | null
+        }
+        Update: {
+          colaborador_id?: string | null
+          created_at?: string
+          data_fim?: string
+          data_inicio?: string
+          id?: string
+          observacoes?: string | null
+          organization_id?: string
+          status?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'ferias_colaborador_id_fkey'
+            columns: ['colaborador_id']
+            isOneToOne: false
+            referencedRelation: 'colaboradores'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'ferias_organization_id_fkey'
+            columns: ['organization_id']
+            isOneToOne: false
+            referencedRelation: 'organizations'
             referencedColumns: ['id']
           },
         ]
@@ -3072,6 +3258,27 @@ export type Database = {
         }
         Relationships: []
       }
+      organizations: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          id: string
+          nome: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          nome: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          nome?: string
+        }
+        Relationships: []
+      }
       perfis_acesso: {
         Row: {
           id: string
@@ -3089,6 +3296,51 @@ export type Database = {
           permissoes?: Json
         }
         Relationships: []
+      }
+      ponto: {
+        Row: {
+          colaborador_id: string | null
+          created_at: string
+          data: string
+          hora_entrada: string | null
+          hora_saida: string | null
+          id: string
+          organization_id: string
+        }
+        Insert: {
+          colaborador_id?: string | null
+          created_at?: string
+          data: string
+          hora_entrada?: string | null
+          hora_saida?: string | null
+          id?: string
+          organization_id: string
+        }
+        Update: {
+          colaborador_id?: string | null
+          created_at?: string
+          data?: string
+          hora_entrada?: string | null
+          hora_saida?: string | null
+          id?: string
+          organization_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'ponto_colaborador_id_fkey'
+            columns: ['colaborador_id']
+            isOneToOne: false
+            referencedRelation: 'colaboradores'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'ponto_organization_id_fkey'
+            columns: ['organization_id']
+            isOneToOne: false
+            referencedRelation: 'organizations'
+            referencedColumns: ['id']
+          },
+        ]
       }
       profiles: {
         Row: {
@@ -3139,6 +3391,63 @@ export type Database = {
             columns: ['perfil_id']
             isOneToOne: false
             referencedRelation: 'perfis_acesso'
+            referencedColumns: ['id']
+          },
+        ]
+      }
+      recrutamento: {
+        Row: {
+          created_at: string
+          curriculo_url: string | null
+          email: string | null
+          id: string
+          image_gender: string | null
+          nome_candidato: string
+          organization_id: string
+          status: string
+          telefone: string | null
+          vaga: string
+          vaga_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          curriculo_url?: string | null
+          email?: string | null
+          id?: string
+          image_gender?: string | null
+          nome_candidato: string
+          organization_id: string
+          status: string
+          telefone?: string | null
+          vaga: string
+          vaga_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          curriculo_url?: string | null
+          email?: string | null
+          id?: string
+          image_gender?: string | null
+          nome_candidato?: string
+          organization_id?: string
+          status?: string
+          telefone?: string | null
+          vaga?: string
+          vaga_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'recrutamento_organization_id_fkey'
+            columns: ['organization_id']
+            isOneToOne: false
+            referencedRelation: 'organizations'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'recrutamento_vaga_id_fkey'
+            columns: ['vaga_id']
+            isOneToOne: false
+            referencedRelation: 'vagas'
             referencedColumns: ['id']
           },
         ]
@@ -3822,6 +4131,53 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      vagas: {
+        Row: {
+          created_at: string
+          departamento: string | null
+          descricao: string | null
+          id: string
+          organization_id: string
+          requisitos: string | null
+          salario: number | null
+          status: string | null
+          tipo_contrato: string | null
+          titulo: string
+        }
+        Insert: {
+          created_at?: string
+          departamento?: string | null
+          descricao?: string | null
+          id?: string
+          organization_id: string
+          requisitos?: string | null
+          salario?: number | null
+          status?: string | null
+          tipo_contrato?: string | null
+          titulo: string
+        }
+        Update: {
+          created_at?: string
+          departamento?: string | null
+          descricao?: string | null
+          id?: string
+          organization_id?: string
+          requisitos?: string | null
+          salario?: number | null
+          status?: string | null
+          tipo_contrato?: string | null
+          titulo?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'vagas_organization_id_fkey'
+            columns: ['organization_id']
+            isOneToOne: false
+            referencedRelation: 'organizations'
+            referencedColumns: ['id']
+          },
+        ]
       }
       whatsapp_ai_suggestions: {
         Row: {
@@ -5167,6 +5523,7 @@ export type Database = {
           user_id: string
         }[]
       }
+      get_my_org_id: { Args: never; Returns: string }
       limpar_cache_pesquisas: { Args: { p_cnae?: string }; Returns: number }
       list_commission_roles: {
         Args: never
